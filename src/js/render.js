@@ -8,6 +8,8 @@ export class Render {
 
         this.maxTemp = 0;
         this.minTemp = 0;
+
+        this.slide = null;
     }
 
     renderCurrentWeather(data = this.data){
@@ -175,6 +177,8 @@ export class Render {
         const weatherDayBoxSlide = document.createElement('div');
         weatherDayBoxSlide.classList = 'weatherDayBoxSlide'; 
 
+        this.slide = weatherDayBoxSlide;
+
         data.days.forEach((day) =>{
            this.#renderDayCardBox(day, weatherDayBoxSlide); 
         })
@@ -184,10 +188,11 @@ export class Render {
     }
 
     renderLoad(){
-
+        this.main.innerHTML = '<h1 class="loading">loading...</h1>'
+        
     }
 
     renderError(){
-
+        this.main.innerHTML = '<h1 class="loading">oops...try again</h1>'
     }
 }

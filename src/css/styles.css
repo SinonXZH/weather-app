@@ -206,7 +206,7 @@ header>button{
     border-radius: 15px;
     background-color: rgba(61, 148, 224, 0.637);
     box-shadow: 2px 5px 4px rgba(0, 0, 0, 0.5);
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .weatherDayBoxSlide{
@@ -214,4 +214,11 @@ header>button{
     display: flex;
     flex-direction: row;
     left: 9px;
+    /* 这个数据很重要 */
+    transition: transform 0.5s ease-in-out;
+}
+
+.loading{
+    font-size: 50px;
+    margin-top: 200px;
 }

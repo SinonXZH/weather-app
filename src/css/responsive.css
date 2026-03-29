@@ -1,0 +1,7 @@
+button, .weatherWeekCard{
+    cursor:pointer;
+}
+
+.weatherWeekCard:hover{
+    background-color: rgba(61, 148, 224, 1);
+}
