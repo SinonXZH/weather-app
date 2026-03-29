@@ -105,10 +105,10 @@ export class Render {
         const time = new Date(parse(data.datetime, 'HH:mm:ss', new Date())).getHours();
 
         const weatherIconName = data.icon;
-        
+
         weatherDayCard.innerHTML = `
         <p class="dayHour">${time}</p>
-        <p class="weatherDayCardTemperature">${data.temp}</p>
+        <p class="weatherDayCardTemperature">${parseInt(data.temp)}°</p>
         <div class="weatherDayFeelsLike"></div>
         <img src="#">
         `
@@ -116,6 +116,10 @@ export class Render {
         const iconSrc = require(`../image/${weatherIconName}.png`);
         weatherDayCard.querySelector('.weatherDayCard>img').src = iconSrc;
     
+        const height = this.#clacHeight(data.temp);
+        const weatherDayFeelsLike = weatherDayCard.querySelector('.weatherDayFeelsLike')
+        weatherDayFeelsLike.style.height = `${height}px`;
+
         fatherBox.appendChild(weatherDayCard);
     }
 
@@ -124,15 +128,15 @@ export class Render {
         weatherDayBox.classList = 'weatherDayBox';
 
         day.hours.forEach((hour, index) => {
-            if (index % 2 !== 0) {
+            // if (index % 2 != 0) {
                 this.#renderDayCard(hour, weatherDayBox);
-            }
+            // }
         });
     
         fatherBox.appendChild(weatherDayBox);
     }
 
-    getMaxMin(data) {    
+    getMaxMin(data = this.data) {    
         let maxTemp = -Infinity;  
         let minTemp = Infinity;  
 
@@ -146,6 +150,22 @@ export class Render {
 
         this.maxTemp = maxTemp;
         this.minTemp = minTemp;
+    }
+
+    #clacHeight (currentTemp){
+        const minHeight = 40;
+        const maxHeight = 180;
+        
+        const maxTemp = this.maxTemp;
+        const minTemp = this.minTemp;
+
+        // 计算标准化温度
+        const normalizedTemp = (currentTemp - minTemp) / (maxTemp - minTemp);
+        
+        // 根据标准化温度计算对应的高度
+        const height = normalizedTemp * (maxHeight - minHeight) + minHeight;
+        
+        return height;
     }
 
     renderAllDayCardBox(data = this.data){

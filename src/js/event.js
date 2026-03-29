@@ -18,14 +18,10 @@ function searchCity (){
             try{
                 const weatherData = await getWeatherData(city);
                 render.data = weatherData;
-                console.log(render.data);
-                console.log('A');
+                render.getMaxMin();
                 render.renderCurrentWeather();
-                console.log('AA');
                 render.renderWeek();
-                console.log('AAA');
                 render.renderAllDayCardBox();
-                console.log('AAAA');
             }catch{
                 
             }
